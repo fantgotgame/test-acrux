@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   });
 
   public isSignedIn = false;
-
+  public errorMessage = '';
   constructor(
     public firebaseService: FirebaseService,
     public router: Router
@@ -26,11 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   async login(email: string, password: string): Promise<void> {
-    await this.firebaseService.login(email, password);
+    this.errorMessage = '';
+    await this.firebaseService.login(email, password).then().catch(error => {
+      this.errorMessage = error.message;
+    });
     if (this.firebaseService.isLoggedIn) {
       this.isSignedIn = true;
+      await this.router.navigate(['/']);
     }
-    this.router.navigate(['/']);
-    console.log(email, password);
+  }
+
+  clearError(): void {
+    this.errorMessage = '';
   }
 }

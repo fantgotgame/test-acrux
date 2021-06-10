@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   public isSignedIn = false;
+  public errorMessage = '';
 
   signUpForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -16,18 +18,26 @@ export class SignupComponent implements OnInit {
   });
 
   constructor(
-    public firebaseService: FirebaseService
+    public firebaseService: FirebaseService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
   async signUp(email: string, password: string): Promise<void> {
-    await this.firebaseService.signup(email, password);
+    await this.firebaseService.signup(email, password).then(response => {
+      console.log(response);
+    }).catch( error => {
+      this.errorMessage = error.message;
+    });
     if (this.firebaseService.isLoggedIn) {
       this.isSignedIn = true;
+      await this.router.navigate(['/']);
     }
+  }
 
-    console.log(email, password);
+  clearError(): void {
+    this.errorMessage = '';
   }
 }

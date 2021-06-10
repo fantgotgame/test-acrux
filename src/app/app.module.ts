@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeedbackComponent } from './pages/feedback/feedback.component';
@@ -23,6 +23,10 @@ const firebaseConfig = {
   appId: '1:467031551322:web:49ef249e0f11fd818f1763'
 };
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +40,8 @@ const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [FirebaseService, { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]

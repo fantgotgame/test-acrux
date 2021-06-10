@@ -12,6 +12,7 @@ export class FeedbackComponent implements OnInit {
   dataFeedbacksFirebase = [];
   isLoggedIn = false;
   dataNewFedback: any;
+  feedbackSended = false;
 
   feedbackForm = new FormGroup({
     name: new FormControl('', [
@@ -55,6 +56,13 @@ export class FeedbackComponent implements OnInit {
       email,
       phone
     });
-    this.firebaseService.sendNewFeedback(this.dataNewFedback).subscribe();
+    this.firebaseService.sendNewFeedback(this.dataNewFedback).subscribe( response => {
+      console.log(response);
+      this.feedbackSended = true;
+      this.feedbackForm.reset();
+      setTimeout( () => {
+        this.feedbackSended = false;
+      }, 5000);
+    });
   }
 }
