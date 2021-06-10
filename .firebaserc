@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "test-acrux": {
+      "hosting": {
+        "test-acrux": [
+          "test-acrux"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "test-acrux"
+  }
+}

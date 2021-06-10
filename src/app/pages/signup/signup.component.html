@@ -1,0 +1,27 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUp(this.signUpForm.get('email').value, this.signUpForm.get('password').value)">
+  <div class="d-flex flex-column">
+    <h2 class="text-center mt-4">
+      Sign up
+    </h2>
+    <div class="d-flex flex-column mt-3">
+      <label for="email">User email</label>
+      <input type="text"
+             id="email"
+             formControlName="email"
+             placeholder="Email">
+    </div>
+    <div class="d-flex flex-column mt-3">
+      <label for="password">User password</label>
+      <input type="text"
+             id="password"
+             formControlName="password"
+             placeholder="Password">
+      <span style="font-size: 12px">Password must be at least 8 characters long and include a lowercase, uppercase character and a number</span>
+    </div>
+    <button class="mt-3"
+            type="submit"
+            [disabled]="!signUpForm.valid">Sign up
+    </button>
+  </div>
+
+</form>
