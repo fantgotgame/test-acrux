@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref" : "/test-acrux/",
+            "baseHref" : "/",
             "deployUrl": "",
             "outputPath": "dist/test-acrux",
             "index": "src/index.html",

@@ -11,7 +11,6 @@ import {AngularFireModule} from '@angular/fire';
 import {FirebaseService} from './services/firebase.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBJTSXv-YOsUndNyt0QrUDrps686pNsln0',
@@ -43,7 +42,7 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     NgxMaskModule.forRoot(maskConfig),
   ],
-  providers: [FirebaseService, { provide: LocationStrategy, useClass: PathLocationStrategy }],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
